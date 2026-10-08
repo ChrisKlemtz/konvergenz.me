@@ -63,3 +63,9 @@ Regelmäßig `data/` und `uploads/` herunterladen. Mehr ist nicht nötig.
 - Hochgeladene Bilder werden geprüft, neu kodiert (entfernt Metadaten/GPS), auf 1800 px verkleinert und als WebP gespeichert
 - Strukturierte Daten (schema.org/Restaurant) mit Öffnungszeiten, hreflang für 4 Sprachen, Sitemap
 - `prefers-reduced-motion` wird berücksichtigt, Navigation per Tastatur bedienbar
+
+## Automatisch veröffentlichen (GitHub → Webhosting)
+
+`.github/workflows/deploy.yml` lädt bei jedem Push auf `main` die geänderten Dateien per FTPS auf den Webspace. Benötigte Repository-Secrets: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_DIR` (z. B. `/konvergenz53/`, mit Schrägstrich am Ende).
+
+Inhalte, die der Inhaber im Dashboard pflegt (`data/*.json`, `uploads/library/`), werden beim Deploy **nie** überschrieben. Sie leben nur auf dem Server. Code-Änderungen also per Git, Inhalte nur im Dashboard.

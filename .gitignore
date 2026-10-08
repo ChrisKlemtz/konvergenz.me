@@ -1,0 +1,7 @@
+# Passwort und Login-Sperren nie ins Repository
+data/auth.json
+data/login-attempts.json
+data/*.tmp
+.DS_Store
+Thumbs.db
+
