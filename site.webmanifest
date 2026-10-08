@@ -1,0 +1,11 @@
+{
+  "name": "Konvergenz 53",
+  "short_name": "Konvergenz 53",
+  "icons": [
+    { "src": "/assets/img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/assets/img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "theme_color": "#1e3b2f",
+  "background_color": "#1e3b2f",
+  "display": "browser"
+}
