@@ -69,3 +69,7 @@ Regelmäßig `data/` und `uploads/` herunterladen. Mehr ist nicht nötig.
 `.github/workflows/deploy.yml` lädt bei jedem Push auf `main` die geänderten Dateien per FTPS auf den Webspace. Benötigte Repository-Secrets: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_DIR` (z. B. `/konvergenz53/`, mit Schrägstrich am Ende).
 
 Inhalte, die der Inhaber im Dashboard pflegt (`data/*.json`, `uploads/library/`), werden beim Deploy **nie** überschrieben. Sie leben nur auf dem Server. Code-Änderungen also per Git, Inhalte nur im Dashboard.
+
+## Vorschau für den Kunden über Vercel
+
+Solange es noch kein Webhosting gibt, läuft eine Vorschau über Vercel (`vercel.json`, Laufzeit `vercel-php`, Einstieg `api/`). Vercel kann keine Dateien speichern: Das Dashboard funktioniert dort nicht. Inhalte lokal im Dashboard pflegen (`php -S localhost:8000 index.php`), dann `data/` und `uploads/` committen und pushen. Vercel baut automatisch neu. `data/auth.json` steht in `.gitignore`.

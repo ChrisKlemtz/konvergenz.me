@@ -593,6 +593,7 @@ if (!$authed) {
     ?>
   <div class="login">
     <p class="login-brand">Konvergenz <span>53</span></p>
+    <?php if (getenv('VERCEL')): ?><div class="flash flash-error">Das ist die Vorschau auf Vercel. Hier kann das Dashboard nichts speichern. Inhalte bitte lokal bearbeiten und per Git hochladen.</div><?php endif; ?>
     <?php if ($setupAllowed): ?>
       <h1>Passwort festlegen</h1>
       <p class="muted">Willkommen! Lege einmalig das Passwort für die Verwaltung fest. Mindestens 10 Zeichen, am besten ein Satz, den du dir gut merken kannst.</p>

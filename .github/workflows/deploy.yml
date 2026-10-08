@@ -3,9 +3,11 @@
 #   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_DIR (z. B. /konvergenz53/)
 name: Deploy auf Webspace
 
+# Vorerst nur manuell startbar, weil es noch kein Webhosting gibt.
+# Sobald Hosting und Secrets stehen, die drei Zeilen unten wieder einkommentieren.
 on:
-  push:
-    branches: [main]
+  # push:
+  #   branches: [main]
   workflow_dispatch:
 
 concurrency:

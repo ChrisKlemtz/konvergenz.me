@@ -6,7 +6,7 @@
 declare(strict_types=1);
 
 // Lokaler PHP-Server: vorhandene Dateien direkt ausliefern
-if (PHP_SAPI === 'cli-server') {
+if (PHP_SAPI === 'cli-server' && !defined('K53_ENTRY')) {
     $file = __DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     if (is_file($file) && !str_contains($file, '/data/')) {
         return false;

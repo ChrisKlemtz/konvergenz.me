@@ -83,7 +83,9 @@ function data_write(string $name, array $data): void
     $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     if (file_put_contents($tmp, $json, LOCK_EX) === false || !rename($tmp, $file)) {
         @unlink($tmp);
-        throw new RuntimeException('Speichern fehlgeschlagen. Bitte Schreibrechte für den Ordner "data" prüfen.');
+        throw new RuntimeException(getenv('VERCEL')
+            ? 'Auf der Vercel-Vorschau kann nichts gespeichert werden. Bitte lokal bearbeiten und per Git hochladen.'
+            : 'Speichern fehlgeschlagen. Bitte Schreibrechte für den Ordner "data" prüfen.');
     }
 }
 
