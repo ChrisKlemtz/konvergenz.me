@@ -30,7 +30,8 @@ function base_path(): string
     static $base = null;
     if ($base === null) {
         $script = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '/index.php');
-        $dir = rtrim(dirname($script), '/');
+        // dirname() liefert unter Windows "\\" statt "/" – daher normalisieren
+        $dir = rtrim(str_replace('\\', '/', dirname($script)), '/');
         if (str_ends_with($dir, '/admin')) {
             $dir = substr($dir, 0, -6);
         }

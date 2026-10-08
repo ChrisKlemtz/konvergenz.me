@@ -7,9 +7,23 @@ declare(strict_types=1);
 
 // Lokaler PHP-Server: vorhandene Dateien direkt ausliefern
 if (PHP_SAPI === 'cli-server' && !defined('K53_ENTRY')) {
-    $file = __DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    if (is_file($file) && !str_contains($file, '/data/')) {
-        return false;
+    // Statische Dateien selbst ausliefern (funktioniert unabhängig vom Startordner, auch unter Windows)
+    $reqPath = rawurldecode((string) parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+    $file = realpath(__DIR__ . $reqPath);
+    $root = realpath(__DIR__);
+    $types = [
+        'css' => 'text/css', 'js' => 'text/javascript', 'svg' => 'image/svg+xml', 'png' => 'image/png',
+        'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'webp' => 'image/webp', 'gif' => 'image/gif',
+        'woff' => 'font/woff', 'woff2' => 'font/woff2', 'ico' => 'image/x-icon', 'txt' => 'text/plain',
+        'html' => 'text/html; charset=utf-8', 'xml' => 'application/xml',
+    ];
+    $ext = strtolower(pathinfo((string) $file, PATHINFO_EXTENSION));
+    if ($file && is_file($file) && str_starts_with($file, $root) && isset($types[$ext])
+        && !preg_match('#[\\/](data|inc|lang|pages)[\\/]#', substr($file, strlen($root)))) {
+        header('Content-Type: ' . $types[$ext]);
+        header('Content-Length: ' . filesize($file));
+        readfile($file);
+        return true;
     }
     if (str_starts_with(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/admin')) {
         $_SERVER['SCRIPT_NAME'] = '/admin/index.php';
